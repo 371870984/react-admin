@@ -4,7 +4,8 @@ const initState = {
   agentName: localStorage.userInfo ? JSON.parse(localStorage.userInfo).agentName : "",
   isLogin: localStorage.username && localStorage.secret && localStorage.userInfo,
   isLoading: false,
-  role: "001"
+  role: "001",
+  avatarUrl: "http://i1.fuimg.com/704526/c7c995237710ff0d.jpg"
 };
 
 export default (state = initState, action) => {
@@ -25,9 +26,9 @@ export default (state = initState, action) => {
       return initState;
     case "LOGOFF_SUCCESS":
       return {
-        username: '',
-        secret: '',
-        agentName: '',
+        username: "",
+        secret: "",
+        agentName: "",
         isLogin: false,
         isLoading: false,
         role: ""
@@ -38,6 +39,11 @@ export default (state = initState, action) => {
         secret: action.payload.secret,
         username: action.payload.username,
         agentName: action.payload.agentName
+      };
+    case "CHANGE_AVATAR":
+      return {
+        ...state,
+        avatarUrl: action.payload.avatarUrl
       };
     default:
       return state;

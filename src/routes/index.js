@@ -1,4 +1,4 @@
-import { NotFound, DashBoard, Login, ArticleList, ArticleEdit, Settings, NoAuth } from "../views";
+import { NotFound, DashBoard, Login, ArticleList, ArticleEdit, Settings, NoAuth, Profile } from "../views";
 
 export const mainRoutes = [
   {
@@ -47,6 +47,12 @@ export const adminRoutes = [
     pathname: "/admin/noauth",
     component: NoAuth,
     title: "没有权限",
+    roles: ["001", "002"]
+  },
+  {
+    pathname: "/admin/profile",
+    component: Profile,
+    title: "个人中心",
     roles: ["001", "002"]
   }
 ];

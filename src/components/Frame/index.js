@@ -13,7 +13,8 @@ const { Header, Content, Sider } = Layout;
 const mapState = state => {
   return {
     notificationsCount: state.notifications.list.filter(item => item.hasRead === false).length,
-    agentName: state.user.agentName
+    agentName: state.user.agentName,
+    avatarUrl: state.user.avatarUrl
   };
 };
 @connect(mapState, { logoff })
@@ -25,6 +26,8 @@ class Frame extends Component {
   onDropdownClick = ({ key }) => {
     if (key === "0") {
       this.props.logoff();
+    } else {
+      this.props.history.push(key);
     }
   };
   render() {
@@ -40,6 +43,9 @@ class Frame extends Component {
             <Dropdown
               overlay={
                 <Menu onClick={this.onDropdownClick.bind(this)}>
+                  <Menu.Item key="/admin/profile">
+                    <span>个人中心</span>
+                  </Menu.Item>
                   <Menu.Item key="0">
                     <span>退出登录</span>
                   </Menu.Item>
@@ -52,7 +58,7 @@ class Frame extends Component {
               </a>
             </Dropdown>
             <Badge count={this.props.notificationsCount}>
-              <Avatar style={{ backgroundColor: "#f56a00", verticalAlign: "middle" }} size="default">
+              <Avatar src={this.props.avatarUrl} size="default">
                 Y
               </Avatar>
             </Badge>

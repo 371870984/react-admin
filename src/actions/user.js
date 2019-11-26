@@ -27,7 +27,7 @@ const getUserInfo = dispatch => {
           agentName: res.data.agentName
         })
       );
-      localStorage.userInfo = JSON.stringify(res.data)
+      localStorage.userInfo = JSON.stringify(res.data);
       setTimeout(() => {
         dispatch(loginSuccess());
       }, 1000);
@@ -57,7 +57,7 @@ export const logoff = () => {
     delete localStorage.username;
     delete localStorage.userInfo;
     // setTimeout(() => {
-      dispatch(logoffSuccess());
+    dispatch(logoffSuccess());
     // }, 1000);
   };
 };
@@ -79,10 +79,25 @@ export const login = userInfo => {
       if (res.status === 200) {
         localStorage.secret = res.data.secret;
         localStorage.username = userInfo.username;
-        getUserInfo(dispatch);
+        dispatch(getUserInfo());
       } else {
         dispatch(loginFailed());
       }
     });
   };
+};
+
+export const changeAvatar = avatarUrl => {
+  try {
+    return dispatch => {
+      dispatch({
+        type: "CHANGE_AVATAR",
+        payload: {
+          avatarUrl: avatarUrl
+        }
+      });
+    };
+  } catch (error) {
+    console.error(error);
+  }
 };
