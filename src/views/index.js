@@ -25,5 +25,9 @@ const ArticleEdit = Loadable({
   loader: () => import("./Article/Edit"),
   loading: Loading
 });
+const NoAuth = Loadable({
+  loader: () => import("./NoAuth"),
+  loading: Loading
+});
 
-export { DashBoard, NotFound, Login, Settings, ArticleList, ArticleEdit };
+export { DashBoard, NotFound, Login, Settings, ArticleList, ArticleEdit, NoAuth };

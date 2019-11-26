@@ -1,13 +1,30 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { autoLogin } from "./actions/user";
+
 import { adminRoutes } from "./routes";
 import { Frame } from "./components";
 
 const menus = adminRoutes.filter(route => route.isNav === true);
 
-export default class App extends Component {
+const mapState = state => {
+  return {
+    isLogin: state.user.isLogin,
+    agentName: state.user.agentName,
+    role: state.user.role
+  };
+};
+@connect(mapState, { autoLogin })
+class App extends Component {
+  componentDidMount() {
+    // 自动登录
+    // if (localStorage.username && localStorage.secret && !this.props.isLogin) {
+    //   this.props.autoLogin();
+    // }
+  }
   render() {
-    return (
+    return this.props.isLogin ? (
       <Frame menus={menus}>
         <Switch>
           {adminRoutes.map(route => {
@@ -17,7 +34,13 @@ export default class App extends Component {
                 key={route.pathname}
                 exact={route.exact}
                 render={routerProps => {
-                  return <route.component {...routerProps} />;
+                  // 权限控制
+                  const hasPermission = route.roles.includes(this.props.role);
+                  return hasPermission ? (
+                    <route.component {...routerProps} />
+                  ) : (
+                    <Redirect to="/admin/noauth" />
+                  );
                 }}
               />
             );
@@ -26,6 +49,10 @@ export default class App extends Component {
           <Redirect to="/404" />
         </Switch>
       </Frame>
+    ) : (
+      <Redirect to="/login" />
     );
   }
 }
+
+export default App;

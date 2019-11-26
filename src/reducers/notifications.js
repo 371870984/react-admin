@@ -60,17 +60,6 @@ const initState = {
 export default (state = initState, action) => {
   console.log(action);
   switch (action.type) {
-    case "MARK_NOTIFICATION_TO_READ":
-      const newList = state.list.map(item => {
-        if (item.id === action.payload.id) {
-          item.hasRead = true;
-        }
-        return item;
-      });
-      return {
-        ...state,
-        list: newList
-      };
     case "MARK_ALLNOTIFICATION_TO_READ":
       return {
         ...state,
@@ -108,6 +97,17 @@ export default (state = initState, action) => {
           })
         };
       }
+    case "MARK_NOTIFICATION_TO_READ":
+      const newList = state.list.map(item => {
+        if (item.id === action.payload.id) {
+          item.hasRead = true;
+        }
+        return item;
+      });
+      return {
+        ...state,
+        list: newList
+      };
     case "FINISH_MARK_TO_READ":
       return {
         ...state,

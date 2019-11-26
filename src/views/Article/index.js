@@ -65,6 +65,7 @@ export default class ArticleList extends Component {
       .then(res => {
         // console.log(res);
         if (res.status === "0") {
+          if (!this.updater.isMounted(this)) return;
           this.setState({
             dataSource: res.data.policyInfoList
           });

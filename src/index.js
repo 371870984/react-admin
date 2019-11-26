@@ -20,9 +20,7 @@ ReactDOM.render(
         <Switch>
           <Route
             path="/admin"
-            render={routerProps => {
-              return <App {...routerProps} />;
-            }}
+            component={App}
           />
           {mainRoutes.map(route => {
             return <Route path={route.pathname} component={route.component} key={route.pathname} />;
