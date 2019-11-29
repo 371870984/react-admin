@@ -1,8 +1,8 @@
-import { doLoginAjax, getUserInfoAjax } from "../services/login";
+import { doLoginAjax, getUserInfoAjax } from '../services/login';
 
 const setUserInfo = data => {
   return {
-    type: "SET_USER_INFO",
+    type: 'SET_USER_INFO',
     payload: {
       secret: localStorage.secret,
       agentName: data.agentName,
@@ -12,37 +12,41 @@ const setUserInfo = data => {
 };
 
 const startLogin = () => {
-  return { type: "START_LOGIN" };
+  return { type: 'START_LOGIN' };
 };
 
 const loginSuccess = () => {
-  return { type: "LOGIN_SUCCESS" };
+  return { type: 'LOGIN_SUCCESS' };
 };
 
 const getUserInfo = dispatch => {
-  getUserInfoAjax().then(res => {
-    if (res.status === "0") {
-      dispatch(
-        setUserInfo({
-          agentName: res.data.agentName
-        })
-      );
-      localStorage.userInfo = JSON.stringify(res.data);
-      setTimeout(() => {
-        dispatch(loginSuccess());
-      }, 1000);
-    } else {
-      dispatch(loginFailed());
-    }
-  });
+  getUserInfoAjax()
+    .then(res => {
+      if (res.status === '0') {
+        dispatch(
+          setUserInfo({
+            agentName: res.data.agentName
+          })
+        );
+        localStorage.userInfo = JSON.stringify(res.data);
+        setTimeout(() => {
+          dispatch(loginSuccess());
+        }, 1000);
+      } else {
+        dispatch(loginFailed());
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
 
 const loginFailed = () => {
-  return { type: "LOGIN_FAILED" };
+  return { type: 'LOGIN_FAILED' };
 };
 
 const logoffSuccess = () => {
-  return { type: "LOGOFF_SUCCESS" };
+  return { type: 'LOGOFF_SUCCESS' };
 };
 
 export const autoLogin = () => {
@@ -65,7 +69,7 @@ export const logoff = () => {
 export const login = userInfo => {
   return dispatch => {
     dispatch(startLogin());
-    var SEC = "abcdefgabcdefg12";
+    var SEC = 'abcdefgabcdefg12';
     var key = window.CryptoJS.enc.Utf8.parse(SEC);
     var srcs = window.CryptoJS.enc.Utf8.parse(userInfo.password);
     var encrypted = window.CryptoJS.AES.encrypt(srcs, key, {
@@ -79,7 +83,7 @@ export const login = userInfo => {
       if (res.status === 200) {
         localStorage.secret = res.data.secret;
         localStorage.username = userInfo.username;
-        dispatch(getUserInfo());
+        getUserInfo(dispatch);
       } else {
         dispatch(loginFailed());
       }
@@ -88,16 +92,12 @@ export const login = userInfo => {
 };
 
 export const changeAvatar = avatarUrl => {
-  try {
-    return dispatch => {
-      dispatch({
-        type: "CHANGE_AVATAR",
-        payload: {
-          avatarUrl: avatarUrl
-        }
-      });
-    };
-  } catch (error) {
-    console.error(error);
-  }
+  return dispatch => {
+    dispatch({
+      type: 'CHANGE_AVATAR',
+      payload: {
+        avatarUrl: avatarUrl
+      }
+    });
+  };
 };

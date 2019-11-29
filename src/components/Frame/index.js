@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Layout, Menu, Icon, Avatar, Badge, Dropdown } from "antd";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { Layout, Menu, Icon, Avatar, Badge, Dropdown } from 'antd';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import { logoff } from "../../actions/user";
+import { logoff } from '../../actions/user';
 
-import logo from "./logo.png";
-import "./frame.less";
+import logo from './logo.png';
+import './frame.less';
 
 const { Header, Content, Sider } = Layout;
 
@@ -24,53 +24,53 @@ class Frame extends Component {
     this.props.history.push(key);
   };
   onDropdownClick = ({ key }) => {
-    if (key === "0") {
+    if (key === '0') {
       this.props.logoff();
     } else {
       this.props.history.push(key);
     }
   };
   render() {
-    const selectedKeyArr = this.props.location.pathname.split("/");
+    const selectedKeyArr = this.props.location.pathname.split('/');
     selectedKeyArr.length = 3;
     return (
-      <Layout style={{ height: "100%" }}>
-        <Header className="header">
-          <div className="logo">
-            <img src={logo} alt="surface" />
+      <Layout style={{ height: '100%' }}>
+        <Header className='header'>
+          <div className='logo'>
+            <img src={logo} alt='surface' />
           </div>
           <div>
             <Dropdown
               overlay={
                 <Menu onClick={this.onDropdownClick.bind(this)}>
-                  <Menu.Item key="/admin/profile">
+                  <Menu.Item key='/admin/profile'>
                     <span>个人中心</span>
                   </Menu.Item>
-                  <Menu.Item key="0">
+                  <Menu.Item key='0'>
                     <span>退出登录</span>
                   </Menu.Item>
                 </Menu>
               }
             >
-              <a className="ant-dropdown-link">
+              <a className='ant-dropdown-link'>
                 {this.props.agentName}
                 {/* <Icon type="down" /> */}
               </a>
             </Dropdown>
             <Badge count={this.props.notificationsCount}>
-              <Avatar src={this.props.avatarUrl} size="default">
+              <Avatar src={this.props.avatarUrl} size='default'>
                 Y
               </Avatar>
             </Badge>
           </div>
         </Header>
         <Layout>
-          <Sider width={200} style={{ background: "#fff" }}>
+          <Sider width={200} style={{ background: '#fff' }}>
             <Menu
               onClick={this.onMenuClick}
-              mode="inline"
-              selectedKeys={[selectedKeyArr.join("/")]}
-              style={{ height: "100%", borderRight: 1 }}
+              mode='inline'
+              selectedKeys={[selectedKeyArr.join('/')]}
+              style={{ height: '100%', borderRight: 1 }}
             >
               {this.props.menus.map(menu => {
                 return (
@@ -82,10 +82,10 @@ class Frame extends Component {
               })}
             </Menu>
           </Sider>
-          <Layout style={{ padding: "24px" }}>
+          <Layout style={{ padding: '24px' }}>
             <Content
               style={{
-                background: "#fff",
+                background: '#fff',
                 margin: 0,
                 minHeight: 280
               }}
