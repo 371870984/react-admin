@@ -1,9 +1,9 @@
-import ajax from "./axios";
+import { services, servicesLogin } from './axios';
 
 export const doLoginAjax = data => {
-  return ajax.servicesLogin.post("member/login.do", data);
+  return servicesLogin.post('member/login.do', data);
 };
 
 export const getUserInfoAjax = data => {
-  return ajax.services.post("member/info.do", data);
+  return services.post('member/info.do', data);
 };

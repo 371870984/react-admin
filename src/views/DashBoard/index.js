@@ -27,33 +27,31 @@ class Donut extends React.Component {
   }
   render() {
     return this.state.isLoaded ? (
-      <div>
-        <Chart width={700} height={450} forceFit={false}>
-          <Geom type='point' position='carat*price' />
-          <Tooltip showTitle={false} />
-          <View data={this.state.dv}>
-            <Geom
-              type='polygon'
-              position='x*y'
-              color='category'
-              style={{
-                stroke: 'white',
-                lineWidth: 2
+      <Chart width={700} height={450} forceFit={false}>
+        <Geom type='point' position='carat*price' />
+        <Tooltip showTitle={false} />
+        <View data={this.state.dv}>
+          <Geom
+            type='polygon'
+            position='x*y'
+            color='category'
+            style={{
+              stroke: 'white',
+              lineWidth: 2
+            }}
+            tooltip='symbol*name*number*atomic_mass*category'
+          >
+            <Label
+              content='symbol'
+              offset={0}
+              textStyle={{
+                fontSize: 450 / 24,
+                fontWeight: 500
               }}
-              tooltip='symbol*name*number*atomic_mass*category'
-            >
-              <Label
-                content='symbol'
-                offset={0}
-                textStyle={{
-                  fontSize: 450 / 24,
-                  fontWeight: 500
-                }}
-              />
-            </Geom>
-          </View>
-        </Chart>
-      </div>
+            />
+          </Geom>
+        </View>
+      </Chart>
     ) : (
       <Spin />
     );

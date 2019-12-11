@@ -1,9 +1,9 @@
-import ajax from "./axios";
+import { services } from './axios';
 
 export const getArticles = data => {
-  return ajax.services.post("contract/listtemp.do", data);
+  return services.post('contract/listtemp.do', data);
 };
 
 export const getArticleDetail = data => {
-  return ajax.services.post("contract/detailtemp.do", data);
+  return services.post('contract/detailtemp.do', data);
 };

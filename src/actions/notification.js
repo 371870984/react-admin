@@ -3,7 +3,7 @@ export const markNotificationToRead = id => {
     dispatch(startMarkToRead(id));
     setTimeout(() => {
       dispatch({
-        type: "MARK_NOTIFICATION_TO_READ",
+        type: 'MARK_NOTIFICATION_TO_READ',
         payload: {
           id
         }
@@ -18,7 +18,7 @@ export const markAllNotificationToUnread = () => {
     dispatch(startMarkToRead());
     setTimeout(() => {
       dispatch({
-        type: "MARK_ALLNOTIFICATION_TO_UNREAD"
+        type: 'MARK_ALLNOTIFICATION_TO_UNREAD'
       });
       dispatch(finishMarkToRead());
     }, 1000);
@@ -30,16 +30,16 @@ export const markAllNotificationToRead = () => {
     dispatch(startMarkToRead());
     setTimeout(() => {
       dispatch({
-        type: "MARK_ALLNOTIFICATION_TO_READ"
+        type: 'MARK_ALLNOTIFICATION_TO_READ'
       });
       dispatch(finishMarkToRead());
     }, 1000);
   };
 };
 
-export const startMarkToRead = id => {
-  return id ? { type: "START_MARK_TO_READ", payload: { id } } : { type: "START_MARK_TO_READ" };
+const startMarkToRead = id => {
+  return id ? { type: 'START_MARK_TO_READ', payload: { id } } : { type: 'START_MARK_TO_READ' };
 };
-export const finishMarkToRead = id => {
-  return id ? { type: "FINISH_MARK_TO_READ", payload: { id } } : { type: "FINISH_MARK_TO_READ" };
+const finishMarkToRead = id => {
+  return id ? { type: 'FINISH_MARK_TO_READ', payload: { id } } : { type: 'FINISH_MARK_TO_READ' };
 };

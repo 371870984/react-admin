@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { Card, List, Avatar, Button, Badge } from "antd";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { Card, List, Avatar, Button, Badge } from 'antd';
+import { connect } from 'react-redux';
 import {
   markNotificationToRead,
   markAllNotificationToRead,
   markAllNotificationToUnread
-} from "../../actions/notification";
+} from '../../actions/notification';
 
 const mapState = state => {
   return {
@@ -19,7 +19,7 @@ class Settings extends Component {
     const notificationList = this.props.notificationList;
     return (
       <Card
-        title="通知消息"
+        title='通知消息'
         bordered={false}
         extra={
           <>
@@ -39,7 +39,7 @@ class Settings extends Component {
         }
       >
         <List
-          itemLayout="horizontal"
+          itemLayout='horizontal'
           dataSource={notificationList}
           renderItem={item => (
             <List.Item

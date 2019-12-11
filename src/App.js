@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { autoLogin } from "./actions/user";
+import React, { Component } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { autoLogin } from './actions/user';
 
-import { adminRoutes } from "./routes";
-import { Frame } from "./components";
+import { adminRoutes } from './routes';
+import { Frame } from './components';
 
 const menus = adminRoutes.filter(route => route.isNav === true);
 
@@ -36,21 +36,17 @@ class App extends Component {
                 render={routerProps => {
                   // 权限控制
                   const hasPermission = route.roles.includes(this.props.role);
-                  return hasPermission ? (
-                    <route.component {...routerProps} />
-                  ) : (
-                    <Redirect to="/admin/noauth" />
-                  );
+                  return hasPermission ? <route.component {...routerProps} /> : <Redirect to='/admin/noauth' />;
                 }}
               />
             );
           })}
-          <Redirect to="/admin/dashboard" from="/admin" exact />
-          <Redirect to="/404" />
+          <Redirect to='/admin/dashboard' from='/admin' exact />
+          <Redirect to='/404' />
         </Switch>
       </Frame>
     ) : (
-      <Redirect to="/login" />
+      <Redirect to='/login' />
     );
   }
 }
